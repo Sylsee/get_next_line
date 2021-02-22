@@ -6,13 +6,46 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:08:12 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/21 16:12:15 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/22 19:49:39 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*ft_strjoin(char const *s1, char const *s2)
+size_t	ft_bad_strlen(char *s)
+{
+	size_t i;
+
+	i = 0;
+	while (s[i] && s[i] != '\n')
+		i++;
+	return (i);
+}
+
+size_t	ft_strlen(char *s)
+{
+	size_t i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int		ft_check(char *s)
+{
+	int i;
+
+	i = -1;
+	if (!s)
+		return (-1);
+	while (s[++i])
+		if (s[i] == '\n')
+			return (i);
+	return (-1);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
 	int		j;
@@ -37,15 +70,15 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	return (ret);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	int		i;
-	int		size;
+	size_t	i;
+	size_t	size;
 	char	*ret;
 
 	i = 0;
 	if (!s || start > ft_strlen(s))
-		return (ft_strdup(""));
+		return (0);
 	if (len > ft_strlen(s) + 1)
 		size = ft_strlen(s);
 	else
@@ -53,7 +86,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ret = (char *)malloc(sizeof(char) * (size + 1));
 	if (!ret)
 		return (NULL);
-	while (s[start + i] && i < (int)len)
+	while (s[start + i] && i < len)
 	{
 		ret[i] = s[start + i];
 		i++;

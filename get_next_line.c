@@ -6,60 +6,24 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:17:20 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/21 16:56:47 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/22 20:02:39 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen_2(char *s)
+static int	ft_return(char *s, size_t i)
 {
-	size_t i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-		i++;
-	return (i);
-}
-
-int	ft_strlen(char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	ft_check(char *s)
-{
-	int i;
-
-	i = -1;
-	if (!s)
-		return (-1);
-	while (s[++i])
-		if (s[i] == '\n')
-			return (i);
-	return (-1);
-}
-
-int	ft_return(char *s)
-{
-	int i;
-
-	i = -1;
-	if (!s)
+	if (i == 0)
+	{
+		if (s)
+			free(s);
 		return (0);
-	while (s[i])
-		i++;
-	if (s[i] == '\0')
-		return (0);
+	}
 	return (1);
 }
 
-int	get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char	*tab[FDMAX];
 	size_t		i;
@@ -67,9 +31,9 @@ int	get_next_line(int fd, char **line)
 	char		*tmp;
 
 	i = 1;
-	if (!line || read(fd, 0, 0) == -1)
+	if (!line || read(fd, 0, 0)  == -1 || BUFFER_SIZE < 1 || fd < 0 || fd > FDMAX)
 		return (-1);
-	while(i != 0 && ft_check(tab[fd] == -1))
+	while(i != 0 && ft_check(tab[fd]) == -1)
 	{
 		i = read(fd, buffer, BUFFER_SIZE);
 		buffer[i] = '\0';
@@ -77,11 +41,50 @@ int	get_next_line(int fd, char **line)
 		tab[fd] = ft_strjoin(buffer, tab[fd]);
 		free(tmp);
 	}
-	tmp = *line;
-	*line = ft_substr(tab[fd], 0, ft_strlen_2(tab[fd]));
+	*line = ft_substr(tab[fd], 0, ft_bad_strlen(tab[fd]));
+	tmp = tab[fd];
+	tab[fd] = ft_substr(tab[fd], ft_bad_strlen(tab[fd]),
+			ft_strlen(tab[fd]) - ft_bad_strlen(tab[fd]));
 	free(tmp);
-	tmp = tab[i];
-	tab[fd] = ft_substr(tab[fd], ft_strlen_2(tab[fd]), ft_strlen(tab[fd]) - ft_strlen_2(tab[fd]));
-	free(tmp);
-	return (ft_return(tab[fd]));
+	return (ft_return(tab[fd], i));
 }
+/*
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main()
+{
+	int             fd;
+	int             i;
+	int             j;
+	char    		*line = 0;
+	char			*lineadress[66];
+	
+	j = 1;
+	if (!(fd = open("files/alphabet", O_RDONLY)))
+	{
+		printf("\nError in open\n");
+		return (0);
+	}
+	while ((i = get_next_line(fd, &line)) > 0)
+	{
+		printf("%s\n", line);
+		lineadress[j - 1] = line;
+		j++;
+	}
+	printf("%s\n", line);
+	free(line);
+	close(fd);
+
+	if (i == -1)
+		printf ("\nError in Fonction - Returned -1\n");
+	else if (j == 66)
+		printf("\nRight number of lines\n");
+	else if (j != 66)
+		printf("\nNot Good - Wrong Number Of Lines\n");
+	while (--j > 0)
+		free(lineadress[j - 1]);
+}*/
