@@ -6,7 +6,7 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:08:12 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/22 19:49:39 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/23 22:43:48 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ size_t	ft_bad_strlen(char *s)
 	size_t i;
 
 	i = 0;
-	while (s[i] && s[i] != '\n')
-		i++;
+	if (s)
+		while (s[i] && s[i] != '\n')
+			i++;
 	return (i);
 }
 
@@ -27,8 +28,9 @@ size_t	ft_strlen(char *s)
 	size_t i;
 
 	i = 0;
-	while (s[i])
-		i++;
+	if (s)
+		while (s[i])
+			i++;
 	return (i);
 }
 
@@ -38,11 +40,11 @@ int		ft_check(char *s)
 
 	i = -1;
 	if (!s)
-		return (-1);
+		return (1);
 	while (s[++i])
 		if (s[i] == '\n')
-			return (i);
-	return (-1);
+			return (0);
+	return (1);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -52,7 +54,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*ret;
 
 	i = 0;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
 	j = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	ret = (char *)malloc(sizeof(char) * (j + 1));

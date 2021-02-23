@@ -6,17 +6,17 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:25:50 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/22 19:50:40 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/24 00:38:42 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <stdlib.h>
 # include <unistd.h>
 
-# define FDMAX 256
+# define FDMAX 257
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
 # endif
