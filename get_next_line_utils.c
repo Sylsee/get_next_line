@@ -6,19 +6,19 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:08:12 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/23 22:43:48 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/24 03:44:28 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_bad_strlen(char *s)
+size_t	ft_strlen_chr(char *s, int c)
 {
 	size_t i;
 
 	i = 0;
 	if (s)
-		while (s[i] && s[i] != '\n')
+		while (s[i] && s[i] != c)
 			i++;
 	return (i);
 }

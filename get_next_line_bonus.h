@@ -6,7 +6,7 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:25:50 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/24 00:38:42 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/24 03:45:03 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int		get_next_line(int fd, char **line);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_bad_strlen(char *s);
+size_t	ft_strlen_chr(char *s, int c);
 size_t	ft_strlen(char *s);
 int		ft_check(char *s);
 

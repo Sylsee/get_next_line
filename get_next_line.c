@@ -6,7 +6,7 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:17:20 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/24 03:24:23 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/24 03:44:52 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int			get_next_line(int fd, char **line)
 		tab[fd] = ft_strjoin(tab[fd], buffer);
 		free(tmp);
 	}
-	*line = ft_substr(tab[fd], 0, ft_bad_strlen(tab[fd]));
+	*line = ft_substr(tab[fd], 0, ft_strlen_chr(tab[fd], '\n'));
 	tmp = tab[fd];
-	tab[fd] = ft_substr(tab[fd], ft_bad_strlen(tab[fd]) + 1,
-			ft_strlen(tab[fd]) - ft_bad_strlen(tab[fd]));
+	tab[fd] = ft_substr(tab[fd], ft_strlen_chr(tab[fd], '\n') + 1,
+			ft_strlen(tab[fd]) - ft_strlen_chr(tab[fd], '\n'));
 	free(tmp);
 	return (ft_return(tab[fd], i));
 }
