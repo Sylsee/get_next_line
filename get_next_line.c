@@ -6,7 +6,7 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:17:20 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/24 03:44:52 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/26 16:36:52 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int			get_next_line(int fd, char **line)
 	if (read(fd, 0, 0) == -1 || fd < 0 || fd > FDMAX || !line ||
 			BUFFER_SIZE < 1)
 		return (-1);
-	while ((i = read(fd, buffer, BUFFER_SIZE)) && ft_check(tab[fd]))
+	while (i != 0 && ft_check(tab[fd]))
 	{
+		i = read(fd, buffer, BUFFER_SIZE);
 		buffer[i] = '\0';
 		tmp = tab[fd];
 		tab[fd] = ft_strjoin(tab[fd], buffer);
