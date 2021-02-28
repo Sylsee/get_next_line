@@ -6,7 +6,7 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:17:20 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/28 00:59:53 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/28 01:00:22 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ int			get_next_line(int fd, char **line)
 	free(tmp);
 	return (ft_return(tab[fd], i));
 }
-
