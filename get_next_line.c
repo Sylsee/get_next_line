@@ -6,13 +6,13 @@
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:17:20 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/28 01:00:22 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/28 14:55:54 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_return(char *s, size_t i)
+static int	ft_return_gnl(char *s, size_t i)
 {
 	if (i == 0)
 	{
@@ -27,25 +27,27 @@ int			get_next_line(int fd, char **line)
 {
 	static char	*tab[FDMAX];
 	size_t		i;
-	char		buffer[BUFFER_SIZE + 1];
+	size_t		len;
+	char		*buffer;
 	char		*tmp;
 
 	i = -1;
-	if (read(fd, 0, 0) == -1 || fd < 0 || fd > FDMAX || !line ||
-			BUFFER_SIZE < 1)
+	if (read(fd, 0, 0) == -1 || fd < 0 || !line || BUFFER_SIZE < 1)
 		return (-1);
-	while (i != 0 && ft_check(tab[fd]))
+	buffer = (char *)malloc(sizeof(buffer) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (-1);
+	while (i != 0 && ft_check_gnl(tab[fd]))
 	{
 		i = read(fd, buffer, BUFFER_SIZE);
 		buffer[i] = '\0';
-		tmp = tab[fd];
-		tab[fd] = ft_strjoin(tab[fd], buffer);
-		free(tmp);
+		tab[fd] = ft_strjoin_gnl(tab[fd], buffer);
 	}
-	*line = ft_substr(tab[fd], 0, ft_strlen_chr(tab[fd], '\n'));
+	len = ft_strlen_chr_gnl(tab[fd], '\n');
+	*line = ft_substr_gnl(tab[fd], 0, len);
 	tmp = tab[fd];
-	tab[fd] = ft_substr(tab[fd], ft_strlen_chr(tab[fd], '\n') + 1,
-			ft_strlen(tab[fd]) - ft_strlen_chr(tab[fd], '\n'));
+	tab[fd] = ft_substr_gnl(tab[fd], len + 1, ft_strlen_gnl(tab[fd]) - len);
 	free(tmp);
-	return (ft_return(tab[fd], i));
+	free(buffer);
+	return (ft_return_gnl(tab[fd], i));
 }

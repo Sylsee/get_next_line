@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:25:50 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/26 18:38:36 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/28 14:57:09 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # endif
 
 int		get_next_line(int fd, char **line);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen_chr(char *s, int c);
-size_t	ft_strlen(char *s);
-int		ft_check(char *s);
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
+char	*ft_strjoin_gnl(char const *s1, char const *s2);
+size_t	ft_strlen_chr_gnl(char *s, int c);
+size_t	ft_strlen_gnl(char *s);
+int		ft_check_gnl(char *s);
 
 #endif

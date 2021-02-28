@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: spoliart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 16:08:12 by spoliart          #+#    #+#             */
-/*   Updated: 2021/02/26 18:39:05 by spoliart         ###   ########.fr       */
+/*   Updated: 2021/02/28 14:57:42 by spoliart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen_chr(char *s, int c)
+size_t	ft_strlen_chr_gnl(char *s, int c)
 {
 	size_t i;
 
@@ -23,7 +23,7 @@ size_t	ft_strlen_chr(char *s, int c)
 	return (i);
 }
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen_gnl(char *s)
 {
 	size_t i;
 
@@ -34,7 +34,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-int		ft_check(char *s)
+int		ft_check_gnl(char *s)
 {
 	int i;
 
@@ -47,7 +47,7 @@ int		ft_check(char *s)
 	return (1);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_gnl(char const *s1, char const *s2)
 {
 	int		i;
 	int		j;
@@ -56,7 +56,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	if (!s1 && !s2)
 		return (NULL);
-	j = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	j = ft_strlen_gnl((char *)s1) + ft_strlen_gnl((char *)s2);
 	ret = (char *)malloc(sizeof(char) * (j + 1));
 	if (!ret)
 		return (NULL);
@@ -69,20 +69,23 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		while (s2[++j])
 			ret[i++] = s2[j];
 	ret[i] = '\0';
+	free((char *)s1);
 	return (ret);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
+	size_t	n;
 	size_t	i;
 	size_t	size;
 	char	*ret;
 
 	i = 0;
-	if (!s || start > ft_strlen(s))
+	n = ft_strlen_gnl(s);
+	if (!s || start > n)
 		return (0);
-	if (len > ft_strlen(s) + 1)
-		size = ft_strlen(s);
+	if (len > n + 1)
+		size = n;
 	else
 		size = len;
 	ret = (char *)malloc(sizeof(char) * (size + 1));
